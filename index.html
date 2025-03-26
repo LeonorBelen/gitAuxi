@@ -8,6 +8,32 @@
 <body>
     <h1>Lista de Diginon</h1>
     <button id="getDiginonBtn">obtener diginon</button>
-    
+    <p id="loading" style="display: none;">Cargando ..</p>
+    <ul id="diginonList"></ul>
+    <script>
+        document.getElementById("getDiginonBtn").addEventListener('click', () => {
+            document.getElementById('loading'),style.display = 'block';
+
+            fetch('https://digimon-api.vercel.app/api/digimon')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(JSON.stringify(data, null, 2));
+
+                    const diginonList = document.getElementById('diginonList');
+                    diginonList.innerHTML="";
+                    data.forEach(diginon => {
+                        li.innerHTML = `
+                            <p><strong>${diginon.name}</strong> - Nivel: ${diginon.level}</p>
+                        `;
+                        diginonList.appendChild(li);
+                    });
+                    document.getElementById('loading').style.display = 'none';
+                })
+                .catch(error => {
+
+                });
+                    
+        });
+    </script>
 </body>
 </html>
